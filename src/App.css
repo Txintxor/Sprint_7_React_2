@@ -27,13 +27,22 @@
   text-align: center;
 }
 
-
-
 .webIl {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
 } 
+
+#fixLabel {
+  margin-right: 1.47rem;
+}
+
+.inputWeb {
+border: none;
+padding: .25rem;
+text-align: right;
+width: 4rem;
+}
 
 
 

@@ -1,5 +1,6 @@
-import React from 'react';
-import {Panell} from '../styled-c/styled-components.js'
+import React from "react";
+import { Panell } from "../styled-c/styled-components.js";
+import Button from "react-bootstrap/Button";
 
 const Menu = (props) => {
   return (
@@ -13,17 +14,66 @@ const Menu = (props) => {
             name="web"
             id="web"
             value="500"
-            onChange={() =>(props.sumaPreu('#web'))}
+            onChange={props.checkWeb}
           />
           <label htmlFor="web">Una pagina web (500&#x20AC;)</label>
-          <Panell >
+          <Panell>
             <li className="webIl">
               <label htmlFor="numPag">Número de págines</label>
-              <input min="0" type="number" value = {props.page} onChange={props.extraWeb} name="numPag" id="numPag" />
+              <Button
+                id="plusPage"
+                className="numPage"
+                onClick={props.changeExtra}
+                variant="info"
+              >
+                +
+              </Button>
+              <input
+                min="1"
+                type="number"
+                value={props.page}
+                onChange={props.extraWeb}
+                name="numPag"
+                className="inputWeb"
+                id="numPag"
+              />
+              <Button
+                className="numPage"
+                onClick={props.changeExtra}
+                variant="info"
+              >
+                {" "}
+                -
+              </Button>
             </li>
             <li className="webIl">
-              <label htmlFor="numIdiom">Número d´idiomes</label>
-              <input min="0" type="number" value = {props.idiom} onChange={props.extraWeb} name="numIdiom" id="numIdiom" />
+              <label id="fixLabel" htmlFor="numIdiom">
+                Número d´idiomes
+              </label>
+              <Button
+                id="plusIdioma"
+                className="numIdioma"
+                onClick={props.changeExtra}
+                variant="info"
+              >
+                +
+              </Button>
+              <input
+                min="1"
+                type="number"
+                value={props.idiom}
+                onChange={props.extraWeb}
+                name="numIdiom"
+                className="inputWeb"
+                id="numIdiom"
+              />
+              <Button
+                className="numIdioma"
+                onClick={props.changeExtra}
+                variant="info"
+              >
+                -
+              </Button>
             </li>
           </Panell>
         </li>
@@ -34,7 +84,7 @@ const Menu = (props) => {
             name="seo"
             id="seo"
             value="300"
-            onChange={() =>(props.sumaPreu('#seo'))}
+            onChange={() => props.sumaPreu("#seo")}
           />
           <label htmlFor="seo">Una consultoria SEO (300&#x20AC;)</label>
         </li>
@@ -45,7 +95,7 @@ const Menu = (props) => {
             name="ads"
             id="ads"
             value="200"
-            onChange={() =>(props.sumaPreu('#ads'))}
+            onChange={() => props.sumaPreu("#ads")}
           />
           <label htmlFor="ads">Una campanya de Google Ads (200&#x20AC;)</label>
         </li>
