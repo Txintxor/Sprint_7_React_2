@@ -9,27 +9,6 @@ function App() {
   const [page, setPage] = useState(1);
   const [idiom, setIdiom] = useState(1);
 
-  const sumaPreu = (e) => {
-    const ev = document.querySelector(e);
-    const value = parseInt(ev.value);
-
-    ev.checked ? setPreu(preu + value) : setPreu(preu - value);
-  };
-
-  const checkWeb = (e) => {
-    const value = parseInt(e.target.value);
-    e.target.checked
-      ? setPreu(preu + value + extra)
-      : setPreu(preu - value - extra);
-  };
-
-  const extraWeb = () => {
-    const pagina = document.querySelector("#numPag");
-    const idioma = document.querySelector("#numIdiom");
-    setPage(parseInt(pagina.value));
-    setIdiom(parseInt(idioma.value));
-  };
-
   const changeExtra = (e) => {
     e.target.className.includes("numPage")
       ? e.target.id === "plusPage"
@@ -43,6 +22,7 @@ function App() {
       ? setIdiom(1)
       : setIdiom(idiom - 1);
   };
+
   useEffect(() => {
     const check = document.querySelector("#web");
     if (check.checked) setPreu(preu - extra);
@@ -60,13 +40,14 @@ function App() {
   return (
     <div className="App">
       <Menu
-        extraWeb={extraWeb}
-        sumaPreu={sumaPreu}
         preu={preu}
         page={page}
         idiom={idiom}
+        extra={extra}
         changeExtra={changeExtra}
-        checkWeb={checkWeb}
+        setPreu={setPreu}
+        setPage={setPage}
+        setIdiom={setIdiom}
       />
     </div>
   );

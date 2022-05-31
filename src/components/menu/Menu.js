@@ -14,7 +14,11 @@ const Menu = (props) => {
             name="web"
             id="web"
             value="500"
-            onChange={props.checkWeb}
+            onChange={(e) =>
+              e.target.checked
+                ? props.setPreu(props.preu + parseInt(e.target.value) + props.extra)
+                : props.setPreu(props.preu - parseInt(e.target.value) - props.extra)
+            }
           />
           <label htmlFor="web">Una pagina web (500&#x20AC;)</label>
           <Panell>
@@ -32,7 +36,9 @@ const Menu = (props) => {
                 min="1"
                 type="number"
                 value={props.page}
-                onChange={props.extraWeb}
+                onChange={(e) =>
+                  props.setPreu(parseInt(e.target.value) + props.extra)
+                }
                 name="numPag"
                 className="inputWeb"
                 id="numPag"
@@ -42,7 +48,6 @@ const Menu = (props) => {
                 onClick={props.changeExtra}
                 variant="info"
               >
-                {" "}
                 -
               </Button>
             </li>
@@ -62,7 +67,7 @@ const Menu = (props) => {
                 min="1"
                 type="number"
                 value={props.idiom}
-                onChange={props.extraWeb}
+                onChange={(e) => props.setIdiom(parseInt(e.target.value))}
                 name="numIdiom"
                 className="inputWeb"
                 id="numIdiom"
@@ -84,7 +89,11 @@ const Menu = (props) => {
             name="seo"
             id="seo"
             value="300"
-            onChange={() => props.sumaPreu("#seo")}
+            onChange={(e) =>
+              e.target.checked
+                ? props.setPreu(props.preu + parseInt(e.target.value))
+                : props.setPreu(props.preu - parseInt(e.target.value))
+            }
           />
           <label htmlFor="seo">Una consultoria SEO (300&#x20AC;)</label>
         </li>
@@ -95,7 +104,11 @@ const Menu = (props) => {
             name="ads"
             id="ads"
             value="200"
-            onChange={() => props.sumaPreu("#ads")}
+            onChange={(e) =>
+              e.target.checked
+                ? props.setPreu(props.preu + parseInt(e.target.value))
+                : props.setPreu(props.preu - parseInt(e.target.value))
+            }
           />
           <label htmlFor="ads">Una campanya de Google Ads (200&#x20AC;)</label>
         </li>
