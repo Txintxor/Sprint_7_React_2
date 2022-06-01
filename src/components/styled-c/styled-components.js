@@ -9,4 +9,29 @@ const Panell = styled.ul`
   border-radius: 8px;
 `;
 
-export { Panell };
+
+
+const DataContainer = styled.div`
+width: fit-content;  
+font-size: 1rem;
+border: solid 2px black;
+border-radius: 5px;
+padding: 2rem;
+  `
+
+
+  const DivContainer = styled.div`
+  display: flex;
+  `
+  
+  const Form = styled.form `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+  padding: 2rem;
+  margin-right: 3rem;
+  border: 2px solid black;
+  border-radius: 5px;`
+  
+   export { Panell,DataContainer, Form, DivContainer};
