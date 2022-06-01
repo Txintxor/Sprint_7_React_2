@@ -14,7 +14,7 @@ function App() {
   // const [web, setWeb] = useState("No");
   // const [seo, setSeo] = useState("No");
   // const [ads, setAds] = useState("No");
-  const [data, setData] = useLocalStorage();
+  // const [data, setData] = useLocalStorage();
 
   const changeExtra = (e) => {
     e.target.className.includes("numPage")
@@ -68,7 +68,7 @@ function App() {
         page={page}
         idiom={idioma}
         extra={extra}
-        data={data}
+        // data={data}
       />
     </div>
   );
