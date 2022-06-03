@@ -187,7 +187,7 @@ const Menu = () => {
           </li>
         </ul>
         <p id="pResult">Preu: {preu}&#x20AC;</p>
-        <Button variant="info" type="submit">
+        <Button variant="info mt-3" type="submit">
           Submit
         </Button>
       </Form>
