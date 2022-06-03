@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import {OutPut} from "./OutPut.js";
+
 import {
   Panell,
   Form,
@@ -98,7 +98,7 @@ const Menu = () => {
             <Panell>
               <li className="webIl">
                 <label htmlFor="numPag">Número de págines</label>
-                <Button
+                <Button 
                   id="plusPage"
                   className="numPage"
                   onClick={changeExtra}
