@@ -6,7 +6,6 @@ import {
   DivContainer,
   DataContainer,
 } from "../styled-c/styled-components.js";
-//NO SÉ POR QUÉ HA DEJADO DE FUNCIONAR BOOTSTRAP
 import Button from "react-bootstrap/Button";
 
 const Menu = () => {

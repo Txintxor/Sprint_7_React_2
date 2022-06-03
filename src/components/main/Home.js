@@ -1,13 +1,18 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-
+import React from "react";
+import Button from "react-bootstrap/Button";
+import { DivHomeContainer } from "../styled-c/styled-components";
 
 const HomeContainer = (props) => {
   return (
-  <div>
-    <h1>Benvinguts a Serveis Informàtics Quintillà</h1>
-  <Button variant="info" href="./menu">Prem-hi per entrar la pagina de selecció de serveis</Button></div>
-  )
-}
+    <DivHomeContainer>
+      <h1 style={{ marginBottom: "2rem" }}>
+        Benvinguts a Serveis Informàtics Quintillà
+      </h1>
+      <Button variant="info" href="./menu">
+        Prem-hi aquí per entrar la pagina de selecció de serveis
+      </Button>
+    </DivHomeContainer>
+  );
+};
 
 export default HomeContainer;
