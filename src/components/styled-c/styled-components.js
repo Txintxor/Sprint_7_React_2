@@ -37,7 +37,7 @@ const DivHomeContainer = styled.div`
   left: 35%;
   display: flex;
   flex-direction: column;
-  alignitems: "center";
+  align-items: "center";
   border: 2px solid orange;
   height: fit-content;
   width: fit-content;
@@ -45,4 +45,12 @@ const DivHomeContainer = styled.div`
   padding: 2rem;
 `;
 
-export { Panell, DataContainer, Form, DivContainer, DivHomeContainer };
+const DivModal = styled.div`
+font-size: 1.2rem;
+border: 2px solid orange;
+text-align: center;
+border-radius: 8px;
+padding: 1rem;
+`;
+
+export { Panell, DataContainer, Form, DivContainer, DivHomeContainer, DivModal };

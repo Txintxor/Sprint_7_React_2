@@ -7,8 +7,15 @@ import {
   DataContainer,
 } from "../styled-c/styled-components.js";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import ModalPage from "./ModalPage.js";
+import ModalIdiom from "./ModalIdiom.js";
 
+//COMPONENTE
 const Menu = () => {
+  //STATES
   const [preu, setPreu] = useState(0);
   const [extra, setExtra] = useState(0);
   const [page, setPage] = useState(1);
@@ -19,6 +26,7 @@ const Menu = () => {
   const [object, setObject] = useState("");
   const [data, setData] = useState(window.localStorage.getItem("data"));
 
+  //METODOS
   const changeExtra = (e) => {
     e.target.className.includes("numPage")
       ? e.target.id === "plusPage"
@@ -33,6 +41,7 @@ const Menu = () => {
       : setIdioma(idioma - 1);
   };
 
+  //METODO QUE ALMACENA EN LOCAL ESTORAGE
   const setLocalStorage = () => {
     const pressupost = {
       web: web,
@@ -46,19 +55,30 @@ const Menu = () => {
     window.localStorage.setItem("data", JSON.stringify(pressupost));
   };
 
+  //MÉTODO MANEJA LOS MODALES
+  const [modalP, setModalP] = useState(false);
+  const [modalI, setModalI] = useState(false);
+  const openModalP = () => setModalP(true) ;
+  const closeModalP = () => setModalP(false);
+  const openModalI = () => setModalI(true);
+  const closeModalI = () => setModalI(false);
+
+
+
   //LOS USEEFFECTS A LOS QUE ME REFERÍA, NO TENGO CLARO QUE LO ESTÉ HACIENDO BIEN
   //SERÍA MEJOR USAR ADDEVENTLISTENER?
-
   useEffect(() => {
     setData(window.localStorage.getItem("data"));
-    data ? setObject(JSON.parse(data)) : setObject({
-      web: "No",
-      page: "0",
-      idioma: "0",
-      seo: "No",
-      ads: "No",
-      preu: "0",
-    }) ;
+    data
+      ? setObject(JSON.parse(data))
+      : setObject({
+          web: "No",
+          page: "0",
+          idioma: "0",
+          seo: "No",
+          ads: "No",
+          preu: "0",
+        });
   }, []);
 
   useEffect(() => {
@@ -73,11 +93,17 @@ const Menu = () => {
       setPreu(preu + extra);
     }
   }, [extra]);
+
+  /////RENDER
   return (
     <DivContainer>
+      {/* FORM */}
+
       <Form id="menuContainer" onSubmit={setLocalStorage}>
         <p id="menuTittle">Que vols fer?</p>
         <ul id="menuUl">
+          {/* PRIMER INPUT . EL DE SELECCION DE WEB
+           */}
           <li className="menuIl">
             <input
               className="preuInput"
@@ -94,10 +120,12 @@ const Menu = () => {
               }
             />
             <label htmlFor="web">Una pagina web (500&#x20AC;)</label>
+
+            {/* CONTENEDOR DE SELECTOR DE NUMERO DE WEBS Y DE NUMERO DE IDIOMAS*/}
             <Panell>
               <li className="webIl">
                 <label htmlFor="numPag">Número de págines</label>
-                <Button 
+                <Button
                   id="plusPage"
                   className="numPage"
                   onClick={changeExtra}
@@ -120,6 +148,14 @@ const Menu = () => {
                   variant="info"
                 >
                   -
+                </Button>
+
+                {/* BOTON DE MODAL */}
+                <Button
+                  variant="warning ms-2"
+                  onClick={openModalP}
+                >
+                  <FontAwesomeIcon icon={faCircleInfo} />
                 </Button>
               </li>
               <li className="webIl">
@@ -149,6 +185,14 @@ const Menu = () => {
                   variant="info"
                 >
                   -
+                </Button>
+
+                {/* BOTON DE MODAL*/}
+                <Button
+                  variant="warning ms-2"
+                  onClick={openModalI}
+                >
+                  <FontAwesomeIcon icon={faCircleInfo} />
                 </Button>
               </li>
             </Panell>
@@ -199,6 +243,12 @@ const Menu = () => {
         <h4 className="dataH">Ads: {object.ads}</h4>
         <h4 className="dataH">AQUEST ES EL PREU: {object.preu} LURULUS</h4>
       </DataContainer>
+      <Modal show={modalP} onHide={closeModalP}>
+        <ModalPage/>
+      </Modal>
+      <Modal show={modalI} onHide={closeModalI}>
+        <ModalIdiom/>
+      </Modal>
     </DivContainer>
   );
 };
