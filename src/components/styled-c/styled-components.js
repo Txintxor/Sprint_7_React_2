@@ -17,11 +17,13 @@ font-size: 1rem;
 border: solid 2px black;
 border-radius: 5px;
 padding: 2rem;
+
   `
 
 
   const DivContainer = styled.div`
   display: flex;
+ 
   `
   
   const Form = styled.form `
@@ -33,5 +35,12 @@ padding: 2rem;
   margin-right: 3rem;
   border: 2px solid black;
   border-radius: 5px;`
+
+  const HomeContainer = styled.div `
+  display: flex;
+  flex-direction: column;
   
-   export { Panell,DataContainer, Form, DivContainer};
+  `
+   
+  
+   export { Panell,DataContainer, Form, DivContainer, HomeContainer};

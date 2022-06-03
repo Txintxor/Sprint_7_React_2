@@ -64,3 +64,50 @@ input[type=number] {
 }
 
 
+
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0 0 3reM;
+  font-size: 1.25rem;
+}
+
+
+
+#menuTittle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.menuIl {
+ margin-bottom: 1rem;
+}
+
+#pResult {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.webIl {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+} 
+
+#fixLabel {
+  margin-right: 1.47rem;
+}
+
+.inputWeb {
+border: none;
+padding: .25rem;
+text-align: right;
+width: 4rem;
+}
+
+.dataH {
+  margin-bottom: 2rem;
+}
+
+
+
