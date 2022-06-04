@@ -15,7 +15,11 @@ import ModalIdiom from "./ModalIdiom.js";
 
 //COMPONENTE
 const Menu = () => {
+
   //STATES
+  const [name, setName] = useState("");
+  const [budgetName, setBudgetName] = useState("");
+  const [date, setDate] = useState("");
   const [preu, setPreu] = useState(0);
   const [extra, setExtra] = useState(0);
   const [page, setPage] = useState(1);
@@ -24,7 +28,15 @@ const Menu = () => {
   const [seo, setSeo] = useState("No");
   const [ads, setAds] = useState("No");
   const [object, setObject] = useState("");
-  const [data, setData] = useState(window.localStorage.getItem("data"));
+  const [data, setData] = useState(window.localStorage.getItem(budgetName));
+
+  //MÉTODOS Y ESTADOS QUE MANEJAN LOS MODALES
+  const [modalP, setModalP] = useState(false);
+  const [modalI, setModalI] = useState(false);
+  const openModalP = () => setModalP(true);
+  const closeModalP = () => setModalP(false);
+  const openModalI = () => setModalI(true);
+  const closeModalI = () => setModalI(false);
 
   //METODOS
   const changeExtra = (e) => {
@@ -42,8 +54,11 @@ const Menu = () => {
   };
 
   //METODO QUE ALMACENA EN LOCAL ESTORAGE
-  const setLocalStorage = () => {
+  const setLocalStorage = (e) => {
     const pressupost = {
+      name: name,
+      budgetName: budgetName,
+      date: date,
       web: web,
       page: page,
       idioma: idioma,
@@ -52,18 +67,16 @@ const Menu = () => {
       preu: preu,
     };
 
-    window.localStorage.setItem("data", JSON.stringify(pressupost));
+    //Si no se introducen el nombre usuario, nombre del presupuesto o no se marca ninguna casilla
+    //No se someten los datos
+    if (name === "" || budgetName === "" || preu === 0) {
+      alert("Falten dades");
+      e.preventDefault();
+    } else {
+      window.localStorage.setItem(budgetName, JSON.stringify(pressupost));
+      setObject(budgetName);
+    }
   };
-
-  //MÉTODO MANEJA LOS MODALES
-  const [modalP, setModalP] = useState(false);
-  const [modalI, setModalI] = useState(false);
-  const openModalP = () => setModalP(true) ;
-  const closeModalP = () => setModalP(false);
-  const openModalI = () => setModalI(true);
-  const closeModalI = () => setModalI(false);
-
-
 
   //LOS USEEFFECTS A LOS QUE ME REFERÍA, NO TENGO CLARO QUE LO ESTÉ HACIENDO BIEN
   //SERÍA MEJOR USAR ADDEVENTLISTENER?
@@ -72,6 +85,8 @@ const Menu = () => {
     data
       ? setObject(JSON.parse(data))
       : setObject({
+          name: "",
+          budgetName: "",
           web: "No",
           page: "0",
           idioma: "0",
@@ -100,9 +115,33 @@ const Menu = () => {
       {/* FORM */}
 
       <Form id="menuContainer" onSubmit={setLocalStorage}>
-        <p id="menuTittle">Que vols fer?</p>
+        {/* INPUT DEL NOMBRE */}
+        <p id="menuTittle">Seleccioni productes</p>
         <ul id="menuUl">
-          {/* PRIMER INPUT . EL DE SELECCION DE WEB
+          <li className="menuIl">
+            <label htmlFor="userName">Introdueixi el seu nom</label>
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              onChange={(e) => {
+                setName(e.target.value);
+                setDate(new Date());
+              }}
+            />
+          </li>
+          <li className="menuIl">
+            <label htmlFor="budgetName">
+              Introdueixi el nom del pressupost
+            </label>
+            <input
+              type="text"
+              name="budgetName"
+              id="budgetName"
+              onChange={(e) => setBudgetName(e.target.value)}
+            />
+          </li>
+          {/* INPUT DE SELECCION DE WEB
            */}
           <li className="menuIl">
             <input
@@ -151,10 +190,7 @@ const Menu = () => {
                 </Button>
 
                 {/* BOTON DE MODAL */}
-                <Button
-                  variant="warning ms-2"
-                  onClick={openModalP}
-                >
+                <Button variant="warning ms-2" onClick={openModalP}>
                   <FontAwesomeIcon icon={faCircleInfo} />
                 </Button>
               </li>
@@ -188,10 +224,7 @@ const Menu = () => {
                 </Button>
 
                 {/* BOTON DE MODAL*/}
-                <Button
-                  variant="warning ms-2"
-                  onClick={openModalI}
-                >
+                <Button variant="warning ms-2" onClick={openModalI}>
                   <FontAwesomeIcon icon={faCircleInfo} />
                 </Button>
               </li>
@@ -236,6 +269,9 @@ const Menu = () => {
         </Button>
       </Form>
       <DataContainer>
+        <h4 className="dataH">Nom: {object.name}</h4>
+        <h4 className="dataH">Pressupost: {object.budgetName}</h4>
+        <h4 className="dataH">Data: {object.date}</h4>
         <h4 className="dataH">Webs: {object.web}</h4>
         <h4 className="dataH">Numero de pagines: {object.page}</h4>
         <h4 className="dataH">Numero d´idiomes: {object.idioma}</h4>
@@ -244,10 +280,10 @@ const Menu = () => {
         <h4 className="dataH">AQUEST ES EL PREU: {object.preu} LURULUS</h4>
       </DataContainer>
       <Modal show={modalP} onHide={closeModalP}>
-        <ModalPage/>
+        <ModalPage />
       </Modal>
       <Modal show={modalI} onHide={closeModalI}>
-        <ModalIdiom/>
+        <ModalIdiom />
       </Modal>
     </DivContainer>
   );
